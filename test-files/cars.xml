@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cars>
+    <tesla_car>
+        <make>Tesla</make>
+        <model>Model S</model>
+        <year>2023</year>
+        <color>White</color>
+        <type>Electric</type>
+    </tesla_car>
+    <ford_car>
+        <make>Ford</make>
+        <model>Mustang</model>
+        <year>2022</year>
+        <color>Red</color>
+        <type>Gasoline</type>
+    </ford_car>
+</cars>

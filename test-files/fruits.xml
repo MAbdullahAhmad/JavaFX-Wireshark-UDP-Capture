@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fruits>
+    <first_fruit>
+        <name>Apple</name>
+        <color>Red</color>
+        <taste>Sweet</taste>
+        <origin>USA</origin>
+    </first_fruit>
+    <second_fruit>
+        <name>Banana</name>
+        <color>Yellow</color>
+        <taste>Sweet</taste>
+        <origin>Ecuador</origin>
+    </second_fruit>
+    <third_fruit>
+        <name>Orange</name>
+        <color>Orange</color>
+        <taste>Citrus</taste>
+        <origin>Spain</origin>
+    </third_fruit>
+</fruits>

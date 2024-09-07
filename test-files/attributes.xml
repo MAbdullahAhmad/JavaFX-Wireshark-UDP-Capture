@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <products count="3" start_id="33" end_id="36" timestamp="2024-09-07T12:00:00Z">
+        <product id="33">
+            <name>Smartphone</name>
+            <category>Electronics</category>
+            <price currency="USD">799.99</price>
+            <stock>25</stock>
+        </product>
+        <product id="34">
+            <name>Laptop</name>
+            <category>Electronics</category>
+            <price currency="USD">1200.00</price>
+            <stock>12</stock>
+        </product>
+        <product id="35">
+            <name>Headphones</name>
+            <category>Accessories</category>
+            <price currency="USD">199.99</price>
+            <stock>100</stock>
+        </product>
+    </products>
+</root>

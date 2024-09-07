@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<functions>
+    <first_function>
+        <name>parse_xml_files</name>
+        <description>parse three xml files and returns as List of 3</description>
+        <output>each file is output as hashmap for better use</output>
+        <other_options>
+            <option_1>output as hashmap, but with attributes also</option_1>
+            <option_2>output as JSON</option_2>
+            <option_3>output as lists</option_3>
+            <option_n>any other output</option_n>
+        </other_options>
+    </first_function>
+    
+    <second_function>
+        <name>wireshark_function</name>
+        <description>starts capturing packets from Wireshark when a signal is received</description>
+        <trigger>signal received from monitoring system</trigger>
+        <output>captured packets are saved in PostgreSQL DB</output>
+    </second_function>
+</functions>

@@ -1,0 +1,10 @@
+/
+├── AppLauncher.java
+├── main/
+│   ├── ParseXMLFilesController.java
+│   └── ParseXMLFiles.java
+├── resources
+│   └── views
+│       └── ParseXMLFilesView.fxml
+├── run.bash
+└── core/
