@@ -1,0 +1,49 @@
+```ini
+{
+    root={
+        name=root,
+        attributes={}
+        data=,
+        children=[
+            {
+                name=testCase,
+                attributes={id=1}
+                data=,
+                children=[
+                    {
+                        name=rateOfTransmission,
+                        attributes={unit=gb/s}
+                        data=1,
+                        children=[],
+                    },
+                    {
+                        name=numberOfPackets,
+                        attributes={}
+                        data=10000,
+                        children=[],
+                    }
+                ],
+            },
+            {
+                name=testCase,
+                attributes={id=2},
+                data=,
+                children=[
+                    {
+                        name=rateOfTransmission,
+                        attributes={unit=gb/s}
+                        data=10,
+                        children=[],
+                    },
+                    {
+                        name=numberOfPackets,
+                        attributes={}
+                        data=1000,
+                        children=[],
+                    }
+                ]
+            }
+        ],
+    }
+}
+```

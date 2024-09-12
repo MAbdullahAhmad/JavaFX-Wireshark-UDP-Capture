@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <testCase id="1">
+        <rateOfTransmission unit="gb/s">1</rateOfTransmission>
+        <numberOfPackets>10000</numberOfPackets>
+    </testCase>
+    <testCase id="2">
+        <rateOfTransmission unit="gb/s">10</rateOfTransmission>
+        <numberOfPackets>1000</numberOfPackets>
+    </testCase>
+</root>

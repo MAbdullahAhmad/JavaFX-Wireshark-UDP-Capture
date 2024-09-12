@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <message id="23456">
+        <msgID>1001</msgID>
+        <value850>25</value850>
+        <value955>85.5</value955>
+        <value956>25</value956>
+        <value957>85.5</value957>
+        <value960>85.5</value960>
+        <value961>97.6</value961>
+        <value962>109.7</value962>
+        <value955Again>121.8</value955Again>
+        <value956Again>133.9</value956Again>
+        <value957Again>146</value957Again>
+    </message>
+    <message id="58">
+        <msgID>1001</msgID>
+        <value850>25</value850>
+        <value955>85.5</value955>
+        <value956>25</value956>
+        <value957>85.5</value957>
+        <value960>85.5</value960>
+        <value961>97.6</value961>
+        <value962>85.5</value962>
+        <value955Again>85.5</value955Again>
+        <value956Again>97.6</value956Again>
+        <value957Again>88</value957Again>
+    </message>
+</root>

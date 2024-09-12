@@ -1,0 +1,1 @@
+<TestCases><TestCase><TestCaseId>1</TestCaseId><rateOfTransmission>1gb/s</rateOfTransmission><numberOfPacket>10,000</numberOfPacket></TestCase><TestCase><TestCaseId>2</TestCaseId><rateOfTransmission>10gb/s</rateOfTransmission><numberOfPacket>1,000</numberOfPacket></TestCase></TestCases>
