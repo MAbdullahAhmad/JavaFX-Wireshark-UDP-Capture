@@ -1,7 +1,5 @@
 package main;
 
-import main.ParseXMLFiles2;
-
 import javafx.stage.FileChooser;
 
 import javafx.application.Application;
@@ -14,7 +12,10 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-public class ParseXMLFiles2Example extends Application {
+import main.ParseXMLFiles;
+
+
+public class ParseXMLFilesExample extends Application {
 
     private Stage stage;
 

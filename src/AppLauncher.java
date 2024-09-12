@@ -1,11 +1,14 @@
-import main.ParseXMLFiles2Example;
-import main.CaptureUDP2Example;
+import main.ParseXMLFilesExample;
+import main.CaptureUDPExample;
 
 public class AppLauncher {
+
     public static void main(String[] args) {
-        // main.ParseXMLFiles.main(args);
-        // main.CaptureUDP.main(args);
-        // (new ParseXMLFiles2Example()).main(args);
-        (new CaptureUDP2Example()).main(args);
+        ParseXMLFilesExample xml_example = new ParseXMLFilesExample();
+        xml_example.main(args);
+
+        CaptureUDPExample udp_example = new CaptureUDPExample();
+        udp_example.main(args);
     }
+
 }

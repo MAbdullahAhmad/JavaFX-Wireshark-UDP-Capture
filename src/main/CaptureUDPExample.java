@@ -6,7 +6,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class CaptureUDP2Example extends Application {
+import main.ParseXMLFiles;
+
+
+public class CaptureUDPExample extends Application {
 
     private TextArea statusArea;
 

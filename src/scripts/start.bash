@@ -17,3 +17,8 @@ javac -cp "$JAVAFX_JARS:$POSTGRESQL_JAR" -d . lib/*.java main/*.java *.java
 
 # Run the JavaFX application with the necessary modules and PostgreSQL driver
 java --module-path "$JAVAFX_LIB" --add-modules=javafx.controls,javafx.fxml -cp ".:$POSTGRESQL_JAR:main" "$MAIN_CLASS"
+
+# 
+# Note:
+#   Run this script from `/` of project
+# 
