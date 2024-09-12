@@ -7,8 +7,6 @@ CREATE DATABASE packets_db;
 
 CREATE TABLE udp_captures (
     id SERIAL PRIMARY KEY,
-    start_timestamp TIMESTAMP DEFAULT NULL,
-    stop_timestamp TIMESTAMP DEFAULT NULL,
     captured_data TEXT DEFAULT NULL
 );
 

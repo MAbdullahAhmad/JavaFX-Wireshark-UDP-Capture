@@ -1,5 +1,7 @@
 package main;
 
+import main.ParseXMLFiles2;
+
 import javafx.stage.FileChooser;
 
 import javafx.application.Application;
@@ -12,10 +14,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import main.ParseXMLFiles;
-
-
-public class ParseXMLFilesExample extends Application {
+public class ParseXMLFiles2Example extends Application {
 
     private Stage stage;
 
@@ -77,7 +76,7 @@ public class ParseXMLFilesExample extends Application {
 
         // Use 'parse_multilpe_xml_files' function to parse files
 
-        ParseXMLFiles parser = new ParseXMLFiles();
+        ParseXMLFiles2 parser = new ParseXMLFiles2();
         List<Map<String, Object>> results = parser.parse_multilpe_xml_files(selectedFiles);
 
         // Print resutls

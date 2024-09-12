@@ -1,2 +1,5 @@
 # JavaFX-Wireshark-UDP-Capture
-Capture data from UDP protocol using wireshark via JavaFX-application
+
+added methods for:
+- Capture data from UDP protocol using wireshark via JavaFX-application
+- Reads and parse XML file

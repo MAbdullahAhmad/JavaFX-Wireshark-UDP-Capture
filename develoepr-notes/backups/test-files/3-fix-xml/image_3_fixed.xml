@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <testResult id="23456">
+        <msgID>1001</msgID>
+        <gfsmSource>20001</gfsmSource>
+        <gfsmDestination>20001</gfsmDestination>
+        <dataID>10001</dataID>
+        <ruleID>1001</ruleID>
+        <sourceMPR>20001</sourceMPR>
+        <destinationMPR>10001</destinationMPR>
+        <destinationIp>192.1.1.5</destinationIp>
+        <sourceIp>192.1.1.6</sourceIp>
+        <destinationPort>10000</destinationPort>
+        <sourcePort>10001</sourcePort>
+        <protocolID>17</protocolID>
+        <expectedResult>allow</expectedResult>
+    </testResult>
+    <testResult id="524">
+        <msgID>1001</msgID>
+        <gfsmSource>10002</gfsmSource>
+        <gfsmDestination>10002</gfsmDestination>
+        <dataID>10001</dataID>
+        <ruleID>1002</ruleID>
+        <sourceMPR>10002</sourceMPR>
+        <destinationMPR>10001</destinationMPR>
+        <destinationIp>192.1.1.5</destinationIp>
+        <sourceIp>192.1.1.6</sourceIp>
+        <destinationPort>10000</destinationPort>
+        <sourcePort>10001</sourcePort>
+        <protocolID>17</protocolID>
+        <expectedResult>Not allow</expectedResult>
+    </testResult>
+</root>

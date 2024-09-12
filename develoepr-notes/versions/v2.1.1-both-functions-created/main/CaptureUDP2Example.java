@@ -6,10 +6,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import main.ParseXMLFiles;
-
-
-public class CaptureUDPExample extends Application {
+public class CaptureUDP2Example extends Application {
 
     private TextArea statusArea;
 
@@ -53,7 +50,7 @@ public class CaptureUDPExample extends Application {
 
     // Method to start listening for UDP packets
     public void startListening() {
-        CaptureUDP udpCapture = new CaptureUDP();
+        CaptureUDP2 udpCapture = new CaptureUDP2();
 
         // // Print to log
         // udpCapture.listen_and_capture_udp(
