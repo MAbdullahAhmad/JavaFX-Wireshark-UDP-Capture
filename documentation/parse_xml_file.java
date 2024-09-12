@@ -13,6 +13,23 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;    
 
+
+/**
+ * Parse given XML Files
+ */
+public List<Map<String, Object>> parse_multilpe_xml_files(List<File> files) {
+    List<Map<String, Object>> results = new ArrayList();
+
+    // Parse and print XML files as key-value pairs
+    for (File file : files) {
+        results.add(parse_xml_file(file));
+    }
+
+    return results;
+
+}
+
+
 /**
  * Parses an XML file and returns the data in the expected structure:
  * Each element has 'name', 'data', 'attributes', and 'children'.
