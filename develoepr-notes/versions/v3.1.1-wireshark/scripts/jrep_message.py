@@ -1,7 +1,5 @@
 import socket
 import json
-import time
-
 
 # Function to create sample JREP data
 def create_jrep_data():
@@ -24,7 +22,6 @@ def send_jrep_message(host, port):
         # Send start signal
         udp_socket.sendto(b'START', (host, port))
         print("Sent START signal")
-        time.sleep(2)
 
         # Send JREP message
         jreap_c_message = create_jrep_data()

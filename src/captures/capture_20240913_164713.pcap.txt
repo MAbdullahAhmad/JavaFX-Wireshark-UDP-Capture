@@ -1,0 +1,4 @@
+{"user_id": 12345, "name": "John Doe", "email": "john.doe@example.com", "age": 30}
+STOP
+{"user_id": 12345, "name": "John Doe", "email": "john.doe@example.com", "age": 30}
+STOP

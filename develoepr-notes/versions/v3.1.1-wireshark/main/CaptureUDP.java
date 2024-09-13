@@ -83,7 +83,7 @@ public class CaptureUDP {
                         if (verbose) System.out.println("Start Signal Received. Starting tshark capture...");
 
                         // Start tshark capture
-                        String tsharkCommand = isWindows ? String.format("tshark -i 1 -f \"host %s and port %d\" -w %s", host, port, outputFilePath) : String.format("echo 'semicolon' | sudo tshark -i lo -f \"host %s and port %d\" -w %s", host, port, outputFilePath);
+                        String tsharkCommand = isWindows ? String.format("tshark -i 1 -f \"host %s and port %d\" -w %s", host, port, outputFilePath) : String.format("echo 'root_pwd' | sudo tshark -i lo -f \"host %s and port %d\" -w %s", host, port, outputFilePath);
                         ProcessBuilder processBuilder = isWindows ? new ProcessBuilder("powershell.exe", "/c", tsharkCommand) : new ProcessBuilder("bash", "-c", tsharkCommand);;
 
                         processBuilder.redirectErrorStream(true);  // Combine stdout and stderr
@@ -107,7 +107,7 @@ public class CaptureUDP {
 
                         // Kill the tshark process
                         if (tsharkProcess != null && tsharkProcess.isAlive()) {
-                            String killCommand = isWindows ? String.format("taskkill /PID %d /F", tsharkProcess.pid()) : String.format("echo 'semicolon' | sudo kill %d", tsharkProcess.pid());
+                            String killCommand = isWindows ? String.format("taskkill /PID %d /F", tsharkProcess.pid()) : String.format("echo 'root_pwd' | sudo kill %d", tsharkProcess.pid());
                             new ProcessBuilder("bash", "-c", killCommand).start();
                         }
                         break;  // Ensure to break after receiving the stop signal
@@ -141,7 +141,7 @@ public class CaptureUDP {
 
 
                 // Command to parse hex data and convert it to ASCII using echo and xxd directly from tshark output
-                String tsharkReadCommand = isWindows ? String.format("tshark -r %s -Y \"udp\" -T fields -e data", outputFilePath) : String.format("echo 'semicolon' | sudo tshark -r %s -Y \"udp\" -T fields -e data", outputFilePath);
+                String tsharkReadCommand = isWindows ? String.format("tshark -r %s -Y \"udp\" -T fields -e data", outputFilePath) : String.format("echo 'root_pwd' | sudo tshark -r %s -Y \"udp\" -T fields -e data", outputFilePath);
 
                 ProcessBuilder readProcessBuilder = new ProcessBuilder("bash", "-c", tsharkReadCommand);
 
@@ -203,7 +203,7 @@ public class CaptureUDP {
             } finally {
                 if (tsharkProcess != null && tsharkProcess.isAlive()) {
                     try {
-                        String killCommand = isWindows ? String.format("taskkill /PID %d /F", tsharkProcess.pid()) : String.format("echo 'semicolon' | sudo kill %d", tsharkProcess.pid());
+                        String killCommand = isWindows ? String.format("taskkill /PID %d /F", tsharkProcess.pid()) : String.format("echo 'root_pwd' | sudo kill %d", tsharkProcess.pid());
 
                         new ProcessBuilder("bash", "-c", killCommand).start();
                     } catch (IOException e) {

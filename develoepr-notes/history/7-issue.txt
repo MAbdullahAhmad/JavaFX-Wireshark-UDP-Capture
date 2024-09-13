@@ -1,0 +1,17 @@
+there is a problem with my tshark command.
+When i run:
+tshark -i lo -f "host 127.0.0.1 and port 5555" -w /home/anderson/Documents/pkg/hakamsol/java/1-two-java-functions-wireshark/src/captures/capture_20240913_150441.pcap
+
+it says following if i run with sudo:
+Running as user "root" and group "root". This could be dangerous.
+Capturing on 'Loopback'
+tshark: The file to which the capture would be saved ("/home/anderson/Documents/pkg/hakamsol/java/1-two-java-functions-wireshark/src/captures/capture_20240913_150441.pcap") could not be opened: Permission denied.
+
+0 packets captured
+
+
+And it says following if i do not run with sudo:
+Capturing on 'lo'
+tshark: Couldn't run /usr/bin/dumpcap in child process: Permission denied
+
+0 packets captured

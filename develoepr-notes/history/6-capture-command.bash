@@ -1,0 +1,1 @@
+sudo tshark -i lo -f "host 127.0.0.1 and port 5555" -a duration:30 -w captures/capture_$(date +%Y%m%d_%H%M%S).pcap

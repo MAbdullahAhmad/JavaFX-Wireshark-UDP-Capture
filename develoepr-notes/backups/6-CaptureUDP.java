@@ -40,8 +40,6 @@ public class CaptureUDP {
         boolean include_signals_in_message,
         boolean verbose
     ) {
-        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(() -> {
             List<String> results = new ArrayList<>();  // To store captured packets
@@ -80,12 +78,12 @@ public class CaptureUDP {
                     // Start signal detection
                     if (!listening && start_signal != null && message.equals(start_signal)) {
                         listening = true;
+                        if (include_signals_in_message) results.add("Start Signal: " + message);
                         if (verbose) System.out.println("Start Signal Received. Starting tshark capture...");
 
                         // Start tshark capture
-                        String tsharkCommand = isWindows ? String.format("tshark -i 1 -f \"host %s and port %d\" -w %s", host, port, outputFilePath) : String.format("echo 'semicolon' | sudo tshark -i lo -f \"host %s and port %d\" -w %s", host, port, outputFilePath);
-                        ProcessBuilder processBuilder = isWindows ? new ProcessBuilder("powershell.exe", "/c", tsharkCommand) : new ProcessBuilder("bash", "-c", tsharkCommand);;
-
+                        String tsharkCommand = String.format("echo 'semicolon' | sudo tshark -i lo -f \"host %s and port %d\" -w %s", host, port, outputFilePath);
+                        ProcessBuilder processBuilder = new ProcessBuilder("bash", "-c", tsharkCommand);
                         processBuilder.redirectErrorStream(true);  // Combine stdout and stderr
 
                         tsharkProcess = processBuilder.start();
@@ -98,62 +96,32 @@ public class CaptureUDP {
                     // Message handling
                     if (!message.isEmpty()) {
                         messageStarted = true;
-                        if (verbose) System.out.println("Message Started.");
+                        if (onDataReceived != null) {
+                            results.add("Message received: " + message);
+                            if (verbose) System.out.println("Message Started.");
+                        }
                     }
 
                     // Stop signal detection
                     if (stop_signal != null && message.equals(stop_signal)) {
+                        if (include_signals_in_message) results.add("Stop Signal: " + message);
                         if (verbose) System.out.println("Stop Signal Received. Stopping tshark...");
 
                         // Kill the tshark process
-                        if (tsharkProcess != null && tsharkProcess.isAlive()) {
-                            String killCommand = isWindows ? String.format("taskkill /PID %d /F", tsharkProcess.pid()) : String.format("echo 'semicolon' | sudo kill %d", tsharkProcess.pid());
-                            new ProcessBuilder("bash", "-c", killCommand).start();
-                        }
+                        String killCommand = String.format("echo 'semicolon' | sudo kill %d", tsharkProcess.pid());
+                        new ProcessBuilder("bash", "-c", killCommand).start();
                         break;  // Ensure to break after receiving the stop signal
                     }
                 }
 
-                // Continuously check if the process is still alive
-                while (tsharkProcess.isAlive()) {
-                    if (verbose) {
-                        System.out.println("Waiting for tshark process to terminate...");
-                    }
-                    try {
-                        Thread.sleep(10);  // Check every 500 milliseconds (adjust as needed)
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        if (verbose) {
-                            System.out.println("Sleep interrupted: " + e.getMessage());
-                        }
-                    }
-                }
-
-                // Wait for file creation
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    if (verbose) {
-                        System.out.println("Sleep interrupted: " + e.getMessage());
-                    }
-                }
-
-
-                // Command to parse hex data and convert it to ASCII using echo and xxd directly from tshark output
-                String tsharkReadCommand = isWindows ? String.format("tshark -r %s -Y \"udp\" -T fields -e data", outputFilePath) : String.format("echo 'semicolon' | sudo tshark -r %s -Y \"udp\" -T fields -e data", outputFilePath);
-
+                // Parse the captured file, handle the case if no packets are captured
+                String tsharkReadCommand = String.format("echo 'semicolon' | sudo tshark -r %s -Y \"udp\" -T fields -e data", outputFilePath);
                 ProcessBuilder readProcessBuilder = new ProcessBuilder("bash", "-c", tsharkReadCommand);
-
-                // Start the tshark process
                 Process readProcess = readProcessBuilder.start();
-
-                // Read the output from tshark directly
                 BufferedReader reader = new BufferedReader(new InputStreamReader(readProcess.getInputStream()));
+
                 String line;
                 boolean packetReceived = false;  // Track if any packet data was received
-
-                // Read each line from the tshark output
                 while ((line = reader.readLine()) != null) {
                     packetReceived = true;  // Set to true if we actually get data
 
@@ -163,37 +131,16 @@ public class CaptureUDP {
                         String str = line.substring(i, i + 2);
                         output.append((char) Integer.parseInt(str, 16));
                     }
-
-                    // Skip 'STOP' signal from tshark output
-                    if (!output.toString().equals(stop_signal)) {
-                        results.add(output.toString());  // Add each packet as a separate result
-                    }
+                    results.add(output.toString());  // Add each packet as a separate result
                 }
 
-                // Check if no packets were received
-                if (!packetReceived && verbose) {
-                    System.out.println("No packets were captured.");
-                }
-
-                if (include_signals_in_message) {
-                    if (start_signal != null) {
-                        results.add(0, start_signal);  // Prepend start signal
-                    }
-                    if (stop_signal != null) {
-                        results.add(stop_signal);  // Append stop signal
-                    }
-                }
+                if (!packetReceived && verbose) System.out.println("No packets were captured.");
 
                 if (onDataReceived != null) onDataReceived.accept(results);  // Pass the results list to onDataReceived
 
-
-                // Check the exit code of the process
                 int readExitCode = readProcess.waitFor();
-                if (readExitCode == 0) {
-                    if (verbose) System.out.println("Hex to ASCII conversion completed successfully.");
-                } else {
-                    if (verbose) System.err.println("Error occurred while parsing the captured file.");
-                }
+                if (readExitCode == 0 && verbose) System.out.println("Captured file parsed successfully.");
+                else if (verbose) System.err.println("Error occurred while parsing the captured file.");
 
                 if (onStop != null) onStop.run();
 
@@ -203,8 +150,7 @@ public class CaptureUDP {
             } finally {
                 if (tsharkProcess != null && tsharkProcess.isAlive()) {
                     try {
-                        String killCommand = isWindows ? String.format("taskkill /PID %d /F", tsharkProcess.pid()) : String.format("echo 'semicolon' | sudo kill %d", tsharkProcess.pid());
-
+                        String killCommand = String.format("echo 'semicolon' | sudo kill %d", tsharkProcess.pid());
                         new ProcessBuilder("bash", "-c", killCommand).start();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -214,7 +160,6 @@ public class CaptureUDP {
             }
         });
     }
-
 
 
     // Overloaded method 1: auto_stop_after_timeout default to true
